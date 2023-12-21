@@ -34,7 +34,7 @@ async function bootstrap() {
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Cho phép truy cập có danh tính (đối với các cookie hoặc chứng thực)
     });
-    await app.listen(8691);
+    await app.listen(5000);
 }
 bootstrap();
 export default bootstrap;
