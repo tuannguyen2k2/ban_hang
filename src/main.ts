@@ -36,7 +36,3 @@ export async function bootstrap() {
     await app.listen(5000);
 }
 bootstrap();
-export default async (req, res) => {
-    const hand = await bootstrap();
-    res.json(hand);
-};
