@@ -9,6 +9,7 @@ import { Category } from './entity/category.entity';
 import { Order } from './entity/order.entity';
 import { Kind } from './entity/kind.entity';
 import { ConnectionOptions } from 'tls';
+import { CategoryModule } from './module/category.module';
 
 const ENV = process.env.NODE_ENV;
 @Module({
@@ -39,6 +40,7 @@ const ENV = process.env.NODE_ENV;
                 } as ConnectionOptions;
             },
         }),
+        CategoryModule,
     ],
     controllers: [AppController],
     providers: [AppService],
