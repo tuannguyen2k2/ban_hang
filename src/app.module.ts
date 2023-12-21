@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './entity/product.entity';
 import { Category } from './entity/category.entity';
@@ -17,7 +16,6 @@ const ENV = process.env.NODE_ENV;
         ConfigModule.forRoot({
             envFilePath: !ENV ? '.env' : `.env.${ENV}`,
             isGlobal: true,
-            load: [configuration],
         }),
         TypeOrmModule.forRootAsync({
             useFactory: () => {
