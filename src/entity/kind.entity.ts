@@ -1,19 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Kind {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-
+export class Kind extends BaseEntity {
     @Column()
     name: string;
 
     @Column()
     categoryId: string;
-
-    constructor() {
-        this.id = uuid();
-    }
 }

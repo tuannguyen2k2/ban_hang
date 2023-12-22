@@ -1,19 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
+import { Entity, Column } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class Order {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+export class Order extends BaseEntity{
 
     @Column()
     code: string;
 
     @Column()
     accountId: string;
-
-    constructor() {
-        this.id = uuid();
-    }
 }

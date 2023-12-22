@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from '../dto/category/create-category.dto';
 import { UpdateCategoryDto } from '../dto/category/update-category.dto';
 import { Category } from '../entity/category.entity';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { SuccessResponse, setSuccessResponse } from 'src/response/success';
+import { errorMessages } from 'src/response/errors/custom';
 
 @Injectable()
 export class CategoryService {
@@ -11,24 +13,44 @@ export class CategoryService {
         @InjectRepository(Category)
         private readonly categoryRepo: Repository<Category>,
     ) {}
-    create(createCategoryDto: CreateCategoryDto) {
+    async create(createCategoryDto: CreateCategoryDto) {
         const category = this.categoryRepo.create(createCategoryDto);
-        return this.categoryRepo.save(category);
+        await this.categoryRepo.save(category);
+        return setSuccessResponse('Create category success');
     }
 
-    async findAll(): Promise<any> {
-        return this.categoryRepo.find();
+    async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
+        const skip = (page - 1) * pageSize;
+        const take = pageSize;
+        const [items, totalElements] = await this.categoryRepo.findAndCount({ skip, take });
+        const totalPages = Math.ceil(totalElements / pageSize);
+        return setSuccessResponse('Get list category success', { content: items, totalElements, totalPages });
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} category`;
+    async findOne(id: string) {
+        const item = await this.categoryRepo.findOne({ where: { id } });
+        if (!item) {
+            throw new ConflictException(errorMessages.category.notFound);
+        }
+        return setSuccessResponse('Get category success', { content: item });
     }
 
-    update(id: number, updateCategoryDto: UpdateCategoryDto) {
-        return `This action updates a #${id} category`;
+    async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+        const item = await this.categoryRepo.findOne({ where: { id } });
+        if (!item) {
+            throw new ConflictException(errorMessages.category.notFound);
+        }
+
+        await this.categoryRepo.save(Object.assign(item, updateCategoryDto));
+        return setSuccessResponse('Update category success');
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} category`;
+    async remove(id: string) {
+        const item = await this.categoryRepo.findOne({ where: { id } });
+        if (!item) {
+            throw new ConflictException(errorMessages.category.notFound);
+        }
+        await this.categoryRepo.delete(id);
+        return setSuccessResponse('Delete category success');
     }
 }
