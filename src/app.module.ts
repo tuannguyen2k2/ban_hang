@@ -9,6 +9,9 @@ import { Order } from './entity/order.entity';
 import { Kind } from './entity/kind.entity';
 import { ConnectionOptions } from 'tls';
 import { CategoryModule } from './module/category.module';
+import { KindModule } from './module/kind.module';
+import { TypeOrmExModule } from './config/typeorm/typeorm-ex.module';
+import { CategoryRepository } from './repository/category.repository';
 
 const ENV = process.env.NODE_ENV;
 @Module({
@@ -38,7 +41,9 @@ const ENV = process.env.NODE_ENV;
                 } as ConnectionOptions;
             },
         }),
+        TypeOrmExModule.forCustomRepository([CategoryRepository]),
         CategoryModule,
+        KindModule,
     ],
     controllers: [AppController],
     providers: [AppService],

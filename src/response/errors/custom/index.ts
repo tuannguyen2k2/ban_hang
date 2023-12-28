@@ -61,7 +61,13 @@ export const errorMessages = {
     category: {
         notFound: {
             message: 'Category not found!',
-            code: '70203',
+            code: '000-CATEGORY-NOT-FOUND',
+        },
+    },
+    kind: {
+        notFound: {
+            message: 'Kind not found!',
+            code: '000-KIND-NOT-FOUND',
         },
     },
     masterDataType: {
