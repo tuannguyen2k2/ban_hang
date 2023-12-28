@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmExModule } from 'src/config/typeorm/typeorm-ex.module';
-import { Kind } from 'src/entity/kind.entity';
-import { CategoryRepository } from 'src/repository/category.repository';
-import { KindRepository } from 'src/repository/kind.repository';
+import { TypeOrmExModule } from '../config/typeorm/typeorm-ex.module';
+import { Kind } from '../entity/kind.entity';
+import { CategoryRepository } from '../repository/category.repository';
+import { KindRepository } from '../repository/kind.repository';
 import { KindController } from '../controller/kind.controller';
 import { KindService } from '../service/kind.service';
 

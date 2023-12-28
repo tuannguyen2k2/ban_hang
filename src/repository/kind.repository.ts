@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Kind } from 'src/entity/kind.entity';
+import { Kind } from '../entity/kind.entity';
 import { Repository } from 'typeorm';
 import { CustomRepository } from '../config/typeorm/typeorm-ex.designator';
 import { selectIdAndNameOfCategory } from './queryCommon/category.select';

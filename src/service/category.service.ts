@@ -3,7 +3,7 @@ import { CreateCategoryDto } from '../dto/category/create-category.dto';
 import { UpdateCategoryDto } from '../dto/category/update-category.dto';
 import { SuccessResponse, setSuccessResponse } from '../response/success';
 import { errorMessages } from '../response/errors/custom';
-import { CategoryRepository } from 'src/repository/category.repository';
+import { CategoryRepository } from '../repository/category.repository';
 
 @Injectable()
 export class CategoryService {

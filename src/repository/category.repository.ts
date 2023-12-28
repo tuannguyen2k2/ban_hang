@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Category } from 'src/entity/category.entity';
+import { Category } from '../entity/category.entity';
 import { Repository } from 'typeorm';
 import { selectCommonFields } from './queryCommon/common.select';
 import { selectIdAndNameOfKind } from './queryCommon/kind.select';
