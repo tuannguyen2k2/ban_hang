@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CategoryRepository } from 'src/repository/category.repository';
 import { KindRepository } from 'src/repository/kind.repository';
-import { errorMessages } from 'src/response/errors/custom';
+import { errorMessages } from '../response/errors/custom';
 import { SuccessResponse, setSuccessResponse } from '../response/success';
 import { CreateKindDto } from '../dto/kind/create-kind.dto';
 import { UpdateKindDto } from '../dto/kind/update-kind.dto';
