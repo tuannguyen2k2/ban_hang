@@ -22,7 +22,7 @@ const ENV = process.env.NODE_ENV;
         }),
         TypeOrmModule.forRootAsync({
             useFactory: () => {
-                const ssl = process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : false;
+                const ssl = { rejectUnauthorized: true };
 
                 return {
                     type: 'postgres',
