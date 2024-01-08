@@ -29,7 +29,7 @@ export async function bootstrap() {
     // const document = SwaggerModule.createDocument(app, config);
     // SwaggerModule.setup('api', app, document);
     app.enableCors({
-        origin: ['*', 'http://localhost:3000'],
+        origin: ['https://ban-hang-cms-preview.vercel.app', 'http://localhost:3000','https://ban-hang-cms.vercel.app'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Cho phép truy cập có danh tính (đối với các cookie hoặc chứng thực)
     });
