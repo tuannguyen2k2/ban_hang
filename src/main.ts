@@ -29,7 +29,7 @@ export async function bootstrap() {
     // const document = SwaggerModule.createDocument(app, config);
     // SwaggerModule.setup('api', app, document);
     app.enableCors({
-        origin: '*',
+        origin: ['*', 'http://localhost:3000'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Cho phép truy cập có danh tính (đối với các cookie hoặc chứng thực)
     });
