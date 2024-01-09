@@ -14,7 +14,7 @@ export class KindController {
 
     @Get()
     findAll(
-        @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+        @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
         @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
     ) {
         return this.kindService.findAll(page, pageSize);
