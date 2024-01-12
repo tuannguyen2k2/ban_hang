@@ -6,11 +6,17 @@ import { selectIdAndNameOfCategory } from './queryCommon/category.select';
 import { selectCommonFields } from './queryCommon/common.select';
 @CustomRepository(Kind)
 export class KindRepository extends Repository<Kind> {
-    public async findAllKinds(page: number, pageSize: number): Promise<[Kind[], number]> {
+    public async findAllKinds(
+        page: number,
+        pageSize: number,
+        sortBy: string,
+        sortOrder: 'ASC' | 'DESC' = 'DESC',
+    ): Promise<[Kind[], number]> {
         const skip = (page - 1) * pageSize;
         const take = pageSize;
         let query = this.createQueryBuilder('kind')
             .leftJoinAndSelect('kind.category', 'category')
+            .orderBy(`kind.${sortBy}`, sortOrder)
             .select(['kind.name'])
             .skip(skip)
             .take(take);

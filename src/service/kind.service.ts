@@ -24,7 +24,9 @@ export class KindService {
     }
 
     async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
-        const [items, totalElements] = await this.kindRepository.findAllKinds(page, pageSize);
+        const sortBy = 'createdAt';
+        const sortOrder = 'ASC';
+        const [items, totalElements] = await this.kindRepository.findAllKinds(page, pageSize, sortBy, sortOrder);
         const totalPages = Math.ceil(totalElements / pageSize);
         return setSuccessResponse('Get list kind success', { content: items, totalElements, totalPages });
     }
