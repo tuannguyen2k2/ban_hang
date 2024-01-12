@@ -15,7 +15,14 @@ export class CategoryService {
     }
 
     async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
-        const [items, totalElements] = await this.categoryRepository.findAllCategories(page, pageSize);
+        const sortBy = 'createdAt';
+        const sortOrder = 'ASC';
+        const [items, totalElements] = await this.categoryRepository.findAllCategories(
+            page,
+            pageSize,
+            sortBy,
+            sortOrder,
+        );
 
         // Sắp xếp danh sách theo createdAt giảm dần
         items.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
