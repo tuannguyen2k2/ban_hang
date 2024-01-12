@@ -16,12 +16,12 @@ export class CategoryRepository extends Repository<Category> {
         const take = pageSize;
         let query = this.createQueryBuilder('category')
             .leftJoinAndSelect('category.kinds', 'kind')
+            .orderBy(`category.${sortBy}`, sortOrder)
             .select(['category.name'])
             .skip(skip)
             .take(take);
         query = selectCommonFields(query, 'category');
         query = selectIdAndNameOfKind(query);
-        query = query.orderBy(`category.${sortBy}`, sortOrder);
         return await query.getManyAndCount();
     }
     public async findOneCategoryById(id: string): Promise<Category> {

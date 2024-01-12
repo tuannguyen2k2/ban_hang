@@ -16,16 +16,13 @@ export class CategoryService {
 
     async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
         const sortBy = 'createdAt';
-        const sortOrder = 'ASC';
+        const sortOrder = 'DESC';
         const [items, totalElements] = await this.categoryRepository.findAllCategories(
             page,
             pageSize,
             sortBy,
             sortOrder,
         );
-
-        // Sắp xếp danh sách theo createdAt giảm dần
-        items.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
         const totalPages = Math.ceil(totalElements / pageSize);
         return setSuccessResponse('Get list category success', { content: items, totalElements, totalPages });
