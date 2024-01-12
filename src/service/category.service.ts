@@ -16,7 +16,7 @@ export class CategoryService {
 
     async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
         const sortBy = 'createdAt';
-        const sortOrder = 'DESC';
+        const sortOrder = 'ASC';
         const [items, totalElements] = await this.categoryRepository.findAllCategories(
             page,
             pageSize,
