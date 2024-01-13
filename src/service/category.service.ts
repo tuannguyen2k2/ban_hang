@@ -33,7 +33,7 @@ export class CategoryService {
         if (!item) {
             throw new ConflictException(errorMessages.category.notFound);
         }
-        return setSuccessResponse('Get category success', { content: item });
+        return setSuccessResponse('Get category success', item);
     }
 
     async update(id: string, updateCategoryDto: UpdateCategoryDto) {
