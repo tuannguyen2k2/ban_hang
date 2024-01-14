@@ -15,7 +15,15 @@ export class CategoryService {
     }
 
     async findAll(page: number, pageSize: number): Promise<SuccessResponse> {
-        const [items, totalElements] = await this.categoryRepository.findAllCategories(page, pageSize);
+        const sortBy = 'createdAt';
+        const sortOrder = 'ASC';
+        const [items, totalElements] = await this.categoryRepository.findAllCategories(
+            page,
+            pageSize,
+            sortBy,
+            sortOrder,
+        );
+
         const totalPages = Math.ceil(totalElements / pageSize);
         return setSuccessResponse('Get list category success', { content: items, totalElements, totalPages });
     }
@@ -25,7 +33,7 @@ export class CategoryService {
         if (!item) {
             throw new ConflictException(errorMessages.category.notFound);
         }
-        return setSuccessResponse('Get category success', { content: item });
+        return setSuccessResponse('Get category success', item);
     }
 
     async update(id: string, updateCategoryDto: UpdateCategoryDto) {

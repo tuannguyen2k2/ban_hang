@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule } from '@nestjs/swagger';
 import { createDocument } from './config/swagger/swagger';
 export async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { cors: true });
     app.useGlobalPipes(new ValidationPipe());
     SwaggerModule.setup('api', app, createDocument(app), {
         customSiteTitle: 'Backend Document',
@@ -29,7 +29,7 @@ export async function bootstrap() {
     // const document = SwaggerModule.createDocument(app, config);
     // SwaggerModule.setup('api', app, document);
     app.enableCors({
-        origin: ['https://ban-hang-cms-preview.vercel.app', 'http://localhost:3000','https://ban-hang-cms.vercel.app'],
+        origin: true,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true, // Cho phép truy cập có danh tính (đối với các cookie hoặc chứng thực)
     });

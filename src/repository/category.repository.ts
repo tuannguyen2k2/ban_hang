@@ -6,11 +6,17 @@ import { selectIdAndNameOfKind } from './queryCommon/kind.select';
 import { CustomRepository } from '../config/typeorm/typeorm-ex.designator';
 @CustomRepository(Category)
 export class CategoryRepository extends Repository<Category> {
-    public async findAllCategories(page: number, pageSize: number): Promise<[Category[], number]> {
+    public async findAllCategories(
+        page: number,
+        pageSize: number,
+        sortBy: string,
+        sortOrder: 'ASC' | 'DESC' = 'DESC',
+    ): Promise<[Category[], number]> {
         const skip = (page - 1) * pageSize;
         const take = pageSize;
         let query = this.createQueryBuilder('category')
             .leftJoinAndSelect('category.kinds', 'kind')
+            .orderBy(`category.${sortBy}`, sortOrder)
             .select(['category.name'])
             .skip(skip)
             .take(take);
